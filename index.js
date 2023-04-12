@@ -8,6 +8,10 @@ const app = express();
 
 app.use("/", express.static(path.join(__dirname, "static")));
 
+app.get("/testing", (req, res) => {
+  res.send("hello world");
+});
+
 const httpServer = createServer(app);
 
 let port = process.env.PORT || 3500;

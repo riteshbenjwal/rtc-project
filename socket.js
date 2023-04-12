@@ -16,6 +16,8 @@ module.exports.initIO = (httpServer) => {
     console.log(socket.user, "Connected");
     socket.join(socket.user);
 
+    console.log("i am working wohooooo");
+
     socket.on("call", (data) => {
       let calleeId = data?.calleeId;
       let rtcMessage = data?.rtcMessage;
@@ -45,6 +47,10 @@ module.exports.initIO = (httpServer) => {
         sender: socket.user,
         rtcMessage: rtcMessage,
       });
+    });
+
+    socket.on("stream_send", async (data) => {
+      socket.to(data.callerId).emit("stream_received", data);
     });
   });
 };
